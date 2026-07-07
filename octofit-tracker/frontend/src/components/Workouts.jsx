@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchCollection } from '../utils/api';
+import { getApiBaseUrl, normalizeItems } from '../utils/api';
 
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
@@ -11,7 +11,16 @@ function Workouts() {
 
     async function loadWorkouts() {
       try {
-        const data = await fetchCollection('workouts');
+        const endpoint = '/api/workouts/';
+        const response = await fetch(`${getApiBaseUrl()}${endpoint}`);
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        const payload = await response.json();
+        const data = normalizeItems(payload);
+
         if (!ignore) {
           setWorkouts(data);
         }

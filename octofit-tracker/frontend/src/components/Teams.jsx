@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchCollection } from '../utils/api';
+import { getApiBaseUrl, normalizeItems } from '../utils/api';
 
 function Teams() {
   const [teams, setTeams] = useState([]);
@@ -11,7 +11,16 @@ function Teams() {
 
     async function loadTeams() {
       try {
-        const data = await fetchCollection('teams');
+        const endpoint = '/api/teams/';
+        const response = await fetch(`${getApiBaseUrl()}${endpoint}`);
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        const payload = await response.json();
+        const data = normalizeItems(payload);
+
         if (!ignore) {
           setTeams(data);
         }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchCollection } from '../utils/api';
+import { getApiBaseUrl, normalizeItems } from '../utils/api';
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -11,7 +11,16 @@ function Users() {
 
     async function loadUsers() {
       try {
-        const data = await fetchCollection('users');
+        const endpoint = '/api/users/';
+        const response = await fetch(`${getApiBaseUrl()}${endpoint}`);
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        const payload = await response.json();
+        const data = normalizeItems(payload);
+
         if (!ignore) {
           setUsers(data);
         }
