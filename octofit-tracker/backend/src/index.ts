@@ -9,7 +9,13 @@ async function startServer() {
     console.log('Connected to MongoDB');
 
     app.listen(PORT, '0.0.0.0', () => {
-      console.log(`API server listening on ${getApiBaseUrl(PORT)}`);
+      const codespaceName = process.env.CODESPACE_NAME;
+      const serverUrl = codespaceName
+        ? `https://${codespaceName}-${PORT}.app.github.dev`
+        : `http://localhost:${PORT}`;
+
+      console.log(`API server listening on ${serverUrl}`);
+      console.log(`Codespaces-aware base URL: ${getApiBaseUrl(PORT)}`);
     });
   } catch (error) {
     console.error('Failed to start server:', error);
