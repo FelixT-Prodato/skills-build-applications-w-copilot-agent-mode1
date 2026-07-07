@@ -1,12 +1,52 @@
-# Build Applications with GitHub Copilot Agent Mode
+# OctoFit Tracker
 
-<img src="https://octodex.github.com/images/Professortocat_v2.png" align="right" height="200px" />
+OctoFit Tracker is a modern multi-tier fitness application with a React/Vite frontend, an Express/TypeScript backend, and a MongoDB data layer.
 
-Hey FelixT-Prodato!
+## Project Structure
 
-Mona here. I'm done preparing your exercise. Hope you enjoy! 💚
+- frontend: React 19 + Vite + Bootstrap + React Router
+- backend: Node.js + Express + TypeScript + Mongoose
+- data: MongoDB running locally on port 27017
 
-Remember, it's self-paced so feel free to take a break! ☕️
+## Prerequisites
 
-[![](https://img.shields.io/badge/Go%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/FelixT-Prodato/skills-build-applications-w-copilot-agent-mode1/issues/1)
+- Node.js and npm
+- MongoDB running locally
+
+## Run the Application
+
+### Frontend
+
+```bash
+npm --prefix octofit-tracker/frontend run dev
+```
+
+Open http://localhost:5173/
+
+### Backend
+
+```bash
+npm --prefix octofit-tracker/backend run dev
+```
+
+The API will run on http://localhost:8000/
+
+### Seed the Database
+
+```bash
+npx ts-node octofit-tracker/backend/src/scripts/seed.ts
+```
+
+## API Endpoints
+
+- GET /api/health
+- GET /api/users/
+- GET /api/teams/
+- GET /api/activities/
+- GET /api/leaderboard/
+- GET /api/workouts/
+
+## Notes
+
+When running in GitHub Codespaces, the backend base URL will use the Codespaces URL format based on CODESPACE_NAME.
 
