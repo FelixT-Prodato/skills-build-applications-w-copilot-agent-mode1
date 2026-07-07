@@ -13,11 +13,11 @@ const leaderboard_1 = __importDefault(require("./routes/leaderboard"));
 const workouts_1 = __importDefault(require("./routes/workouts"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-const getApiBaseUrl = (port = 8000) => {
+const getApiBaseUrl = () => {
     const codespaceName = process.env.CODESPACE_NAME;
     return codespaceName
-        ? `https://${codespaceName}-${port}.app.github.dev`
-        : `http://localhost:${port}`;
+        ? `https://${codespaceName}-8000.app.github.dev`
+        : 'http://localhost:8000';
 };
 exports.getApiBaseUrl = getApiBaseUrl;
 app.get('/api/health', (_req, res) => {

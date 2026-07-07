@@ -43,10 +43,10 @@ async function startServer() {
         app_1.default.listen(PORT, '0.0.0.0', () => {
             const codespaceName = process.env.CODESPACE_NAME;
             const serverUrl = codespaceName
-                ? `https://${codespaceName}-${PORT}.app.github.dev`
+                ? `https://${codespaceName}-8000.app.github.dev`
                 : `http://localhost:${PORT}`;
             console.log(`API server listening on ${serverUrl}`);
-            console.log(`Codespaces-aware base URL: ${(0, app_1.getApiBaseUrl)(PORT)}`);
+            console.log(`Codespaces-aware base URL: ${(0, app_1.getApiBaseUrl)()}`);
         });
     }
     catch (error) {
